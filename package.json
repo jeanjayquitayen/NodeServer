@@ -1,0 +1,26 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "node server using io,express etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeanjayquitayen/NodeServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeanjayquitayen/NodeServer/issues"
+  },
+  "homepage": "https://github.com/jeanjayquitayen/NodeServer#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "serialport": "^8.0.6",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.1.1"
+  }
+}
