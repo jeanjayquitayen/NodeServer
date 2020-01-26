@@ -35,13 +35,28 @@ const parser = usbport.pipe(new Readline({delimiter: '\r\n'}));
 parser.on('data', (data)=>{
      console.log(data);
      let db = new sqlite3.Database('test.db');
-     let sql = `SELECT * FROM students WHERE idcode= '${data}'`;
+     let sql1 = `SELECT * FROM students WHERE idcode='${data}'`;
+     let sql2 = `SELECT * FROM staffs WHERE idcode='${data}'`;
      // let sqlupdate = `UPDATE students SET requested = ? WHERE idcode= ?`
-     db.get(sql, [], (err, row) => {
+     db.get(sql1, [], (err, row) => {
        if (err) {
          throw err;
        }
+       else if (row == null){
+          db.get(sql2, [], (err, row) => {
+               if (err) {
+                 throw err;
+               }
+               else if (row == null){
+                    console.log("Not registered");
+               }
+               io.sockets.emit('serverData', row);
+       })
+     }
+     else{
           io.sockets.emit('serverData', row);
+     }
+          
      });
      // close the database connection
      db.close();
