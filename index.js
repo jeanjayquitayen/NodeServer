@@ -34,8 +34,9 @@ const usbport = new SerialPort('/dev/ttyUSB0',{
 const parser = usbport.pipe(new Readline({delimiter: '\r\n'}));
 parser.on('data', (data)=>{
      console.log(data);
-     let db = new sqlite3.Database('test.db');
-     let sql1 = `SELECT * FROM students WHERE idcode='${data}'`;
+     let db = new sqlite3.Database('records.db');
+     let sql1 = `SELECT * FROM students INNER JOIN results on results.recordid = students.id WHERE \
+     students.idcode='${data}'`;
      let sql2 = `SELECT * FROM staffs WHERE idcode='${data}'`;
      // let sqlupdate = `UPDATE students SET requested = ? WHERE idcode= ?`
      db.get(sql1, [], (err, row) => {
@@ -72,9 +73,23 @@ io.sockets.on('connection',(socket)=>{
      
      console.log('Socket Connection Established!');
      console.log(socket.id);
-     socket.on('confirmConnection',(socket)=>{
+     socket.on('confirmConnection',(data)=>{
           console.log("received event")
           io.emit('serverMessage','ok');
-     })
      });
+     socket.on('findid', (data)=>{
+          let db = new sqlite3.Database('records.db');
+          let sqlget = `SELECT * FROM students INNER JOIN results on results.recordid = students.id WHERE \
+          students.stdnum='${data}'`;
+          console.log(data)
+          db.get(sqlget, [], (err, row) => {
+               if (err) {
+                 throw err;
+               }
+               io.sockets.emit('serverData', row);
+
+          });
+          db.close()
+     });
+});
 
