@@ -35,7 +35,7 @@ const parser = usbport.pipe(new Readline({delimiter: '\r\n'}));
 parser.on('data', (data)=>{
      console.log(data);
      let db = new sqlite3.Database('records.db');
-     let sql1 = `SELECT * FROM students INNER JOIN results on results.recordid = students.id WHERE \
+     let sql1 = `SELECT * FROM students CROSS JOIN results on results.recordid = students.id WHERE \
      students.idcode='${data}'`;
      let sql2 = `SELECT * FROM staffs WHERE idcode='${data}'`;
      // let sqlupdate = `UPDATE students SET requested = ? WHERE idcode= ?`
