@@ -35,7 +35,7 @@ const parser = usbport.pipe(new Readline({delimiter: '\r\n'}));
 parser.on('data', (data)=>{
      console.log(data);
      let db = new sqlite3.Database('records.db');
-     let sql1 = `SELECT * FROM students CROSS JOIN results ON results.recordid = students.id WHERE \
+     let sql1 = `SELECT * FROM students CROSS JOIN results ON results.recordid = students.stdnum WHERE \
      students.idcode='${data}'`;
      let sql2 = `SELECT * FROM staffs WHERE idcode='${data}'`;
      // let sqlupdate = `UPDATE students SET requested = ? WHERE idcode= ?`
@@ -79,7 +79,7 @@ io.sockets.on('connection',(socket)=>{
      });
      socket.on('findid', (data)=>{
           let db = new sqlite3.Database('records.db');
-          let sqlget = `SELECT * FROM students INNER JOIN results on results.recordid = students.id WHERE \
+          let sqlget = `SELECT * FROM students INNER JOIN results on results.owner = students.stdnum WHERE \
           students.stdnum='${data}'`;
           console.log(data)
           db.get(sqlget, [], (err, row) => {
@@ -91,21 +91,21 @@ io.sockets.on('connection',(socket)=>{
           });
           db.close()
      });
-     socket.on('Update', (data)=>{
-          let db = new sqlite3.Database('records.db');
-          let sqlupdate = `UPDATE results SET drugtest='${data['drugtest']}', xray='${data['xray']}',
-          urinalysis='${data['urinalysis']}', bloodtyping='${data['bloodtyping']}', \
-          HBSag='${data['HBSag']}', 1stVaccine='${data['1stVaccine']}', 2ndVaccine='${data['2ndVaccine']}', 
-          3rdVaccine='${data['3rdVaccine']}' WHERE students.stdnum='${data['stdnum']}'`;
-          console.log(data)
-          db.get(sqlupdate, [], (err, row) => {
-               if (err) {
-                 throw err;
-               }
-               io.sockets.emit('serverData', row);
+     socket.on('updateResult', (data)=>{
+          // let db = new sqlite3.Database('records.db');
+          // let sqlupdate = `UPDATE results SET drugtest='${data['drugtest']}', xray='${data['xray']}',
+          // urinalysis='${data['urinalysis']}', bloodtyping='${data['bloodtyping']}', \
+          // HBSag='${data['HBSag']}', 1stVaccine='${data['1stVaccine']}', 2ndVaccine='${data['2ndVaccine']}', 
+          // 3rdVaccine='${data['3rdVaccine']}' WHERE students.stdnum='${data['stdnum']}'`;
+          console.log(data.dtest)
+          // db.get(sqlupdate, [], (err, row) => {
+          //      if (err) {
+          //        throw err;
+          //      }
+          //      io.sockets.emit('serverData', row);
 
-          });
-          db.close()
+          // });
+          // db.close()
      });
 });
 
