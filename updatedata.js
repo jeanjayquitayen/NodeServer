@@ -22,7 +22,7 @@ let db = new sqlite3.Database('records.db');
             console.log(`Rows Updated ${this.changes}`);
           });
           // close the database connection
-          db.close();
+        //   db.close();
     }
 
 

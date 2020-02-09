@@ -96,8 +96,8 @@ parser.on('data', (data)=>{
       }
     });
      
-    // close the database connection
-    db.close();
+    // // close the database connection
+    // db.close();
 
     
  });
