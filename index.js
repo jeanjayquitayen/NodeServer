@@ -39,7 +39,7 @@ let update = require('./updatedata.js')
 parser.on('data', (data)=>{
      console.log(data);
      let db = new sqlite3.Database('records.db');
-     let sql1 = `SELECT * FROM students CROSS JOIN results ON results.recordid = students.stdnum WHERE \
+     let sql1 = `SELECT * FROM students CROSS JOIN results ON results.owner = students.stdnum WHERE \
      students.idcode='${data}'`;
      let sql2 = `SELECT * FROM staffs WHERE idcode='${data}'`;
      // let sqlupdate = `UPDATE students SET requested = ? WHERE idcode= ?`
