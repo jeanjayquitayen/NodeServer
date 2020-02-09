@@ -15,17 +15,11 @@ var questions = [
     type: 'input',
     name: 'last_name',
     message: "What's your last name",
-    default: function() {
-      return 'Unknown';
-    }
   },
   {
     type: 'input',
     name: 'mid_name',
     message: "What's your middle name",
-    default: function() {
-      return 'Unknow';
-    }
   },
   {
     type: 'input',
@@ -86,7 +80,7 @@ parser.on('data', (data)=>{
       }
       else{
         inquirer.prompt(questions).then(answers => {
-            //console.log(JSON.stringify(answers, null, '  '));
+            console.log(JSON.stringify(answers, null, '  '));
             manage.InsertData(
               answers.first_name,
               answers.last_name,
