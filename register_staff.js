@@ -73,7 +73,7 @@ parser.on('data', (data)=>{
               prc,
               idcode)
              VALUES(?,?,?,?,?)`;
-            db.run(sql, [answers.first_name,answers.last_name,answers.mid_name,answers.prc,idcode], (err) => {
+            db.run(sql, [answers.first_name,answers.last_name,answers.mid_name,answers.prc,data], (err) => {
                 if (err) {
                   throw err;
                 }
