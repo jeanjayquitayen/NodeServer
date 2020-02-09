@@ -10,9 +10,9 @@ let sqlite3 = require('sqlite3').verbose();
         urinalysis	    = ?,
         bloodtyping	    = ?,
         HBSag	        = ?,
-        1stVaccine	    = ?,
-        2ndVaccine	    = ?,
-        3rdVaccine	    = ?,
+        Vaccine1	    = ?,
+        Vaccine2	    = ?,
+        Vaccine3	    = ?,
         WHERE  owner = ?`;
         let db = new sqlite3.Database('records.db');
         db.run(sql_result, [drugtest,xray,urinalysis,bloodtyping,

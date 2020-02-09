@@ -23,9 +23,9 @@ function createTable(){
         "urinalysis"	TEXT,
         "bloodtyping"	TEXT,
         "HBSag"	TEXT,
-        "1stVaccine"	TEXT,
-        "2ndVaccine"	TEXT,
-        "3rdVaccine"	TEXT,
+        "Vaccine1"	TEXT,
+        "Vaccine2"	TEXT,
+        "Vaccine3"	TEXT,
         "VaccinationDate"	TEXT,
         "owner"	TEXT NOT NULL,
         FOREIGN KEY("owner") REFERENCES students ("stdnum")
