@@ -23,7 +23,7 @@ let sqlite3 = require('sqlite3').verbose();
             console.log(`Rows Updated ${this.changes}`);
           });
           // close the database connection
-        //   db.close();
+         db.close();
     }
 
 
