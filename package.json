@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/jeanjayquitayen/NodeServer#readme",
   "dependencies": {
+    "config": "^3.2.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "inquirer": "^7.0.4",
     "path": "^0.12.7",
     "serialport": "^8.0.6",
     "socket.io": "^2.3.0",

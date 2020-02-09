@@ -2,26 +2,43 @@ const sqlite3 = require('sqlite3').verbose();
  
 let db = new sqlite3.Database('records.db');
 function createTable(){
-    db.run(`CREATE TABLE IF NOT EXISTS students (id integer PRIMARY KEY AUTOINCREMENT,
-        firstname text not null,
-        lastname text not null,
-        middlename text not null,
-        course text not null,
-        year integer not null,
-        gender text not null)`);
+    db.run(`CREATE TABLE "students" (
+        "id"	integer PRIMARY KEY AUTOINCREMENT,
+        "firstname"	TEXT NOT NULL,
+        "lastname"	TEXT NOT NULL,
+        "middlename"	text NOT NULL,
+        "course"	TEXT NOT NULL,
+        "year"	integer NOT NULL,
+        "gender"	text NOT NULL,
+        "idcode"	TEXT NOT NULL,
+        "stdnum"	TEXT NOT NULL
+    )`);
     
-    db.run(`CREATE TABLE IF NOT EXISTS results (recordid integer PRIMARY KEY AUTOINCREMENT,
-        date text not null,
-        daterel text not null,
-        drug integer not null,
-        xray integer not null,
-        FOREIGN KEY (recordid) REFERENCES students (id) )`);
+    db.run(`CREATE TABLE "results" (
+        "recordid"	INTEGER PRIMARY KEY AUTOINCREMENT,
+        "date"	TEXT,
+        "daterel"	TEXT,
+        "drugtest"	TEXT,
+        "xray"	TEXT,
+        "urinalysis"	TEXT,
+        "bloodtyping"	TEXT,
+        "HBSag"	TEXT,
+        "1stVaccine"	TEXT,
+        "2ndVaccine"	TEXT,
+        "3rdVaccine"	TEXT,
+        "VaccinationDate"	TEXT,
+        "owner"	TEXT NOT NULL,
+        FOREIGN KEY("owner") REFERENCES students ("stdnum")
+    )`);
 
-    db.run(`CREATE TABLE IF NOT EXISTS staffs (id integer PRIMARY KEY AUTOINCREMENT,
-        firstname text not null,
-        lastname text not null,
-        middlename text not null,
-        prc text not null)`);
+    db.run(`CREATE TABLE "staffs" (
+        "id"	integer PRIMARY KEY AUTOINCREMENT,
+        "firstname"	TEXT NOT NULL,
+        "lastname"	TEXT NOT NULL,
+        "middlename"	TEXT NOT NULL,
+        "prc"	TEXT NOT NULL,
+        "idcode"	TEXT NOT NULL
+    )`);
 }
 
 createTable()

@@ -25,13 +25,17 @@ process.on('SIGINT', function() {
 var server = app.listen(port, () => {
      console.log('on port' + port)
      })
-var io = require('socket.io')(server)
+var io = require('socket.io')(server);
 const SerialPort = require('serialport');
 const Readline = SerialPort.parsers.Readline;
-const usbport = new SerialPort('/dev/ttyUSB0',{
+const SerialConfig = require('config');
+const ArduinoPort = SerialConfig.get("Arduino.port");
+const usbport = new SerialPort(ArduinoPort,{
       baudRate: 9600
      });
 const parser = usbport.pipe(new Readline({delimiter: '\r\n'}));
+
+let update = require('./updatedata.js')
 parser.on('data', (data)=>{
      console.log(data);
      let db = new sqlite3.Database('records.db');
@@ -92,20 +96,8 @@ io.sockets.on('connection',(socket)=>{
           db.close()
      });
      socket.on('updateResult', (data)=>{
-          // let db = new sqlite3.Database('records.db');
-          // let sqlupdate = `UPDATE results SET drugtest='${data['drugtest']}', xray='${data['xray']}',
-          // urinalysis='${data['urinalysis']}', bloodtyping='${data['bloodtyping']}', \
-          // HBSag='${data['HBSag']}', 1stVaccine='${data['1stVaccine']}', 2ndVaccine='${data['2ndVaccine']}', 
-          // 3rdVaccine='${data['3rdVaccine']}' WHERE students.stdnum='${data['stdnum']}'`;
+          update.UpdateData(data.dtest,data.xray,data.uri,data.btype,data.hbsag,data.v1,data.v2,data.v3)
           console.log(data.dtest)
-          // db.get(sqlupdate, [], (err, row) => {
-          //      if (err) {
-          //        throw err;
-          //      }
-          //      io.sockets.emit('serverData', row);
-
-          // });
-          // db.close()
      });
 });
 

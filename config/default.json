@@ -1,0 +1,6 @@
+{
+    "Arduino":{
+        "port":"/dev/ttyUSB0"
+    }
+
+}
