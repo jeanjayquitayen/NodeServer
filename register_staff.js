@@ -66,14 +66,15 @@ parser.on('data', (data)=>{
         inquirer.prompt(questions).then(answers => {
             console.log(data);
             console.log(JSON.stringify(answers, null, '  '));
-            let sql = `INSERT INTO staffs(
+            let db = new sqlite3.Database('records.db');
+            let sql_insert = `INSERT INTO staffs(
               firstname,
               lastname,
               middlename,
               prc,
               idcode)
              VALUES(?,?,?,?,?)`;
-            db.run(sql, [answers.first_name,answers.last_name,answers.mid_name,answers.prc,data], (err) => {
+            db.run(sql_insert, [answers.first_name,answers.last_name,answers.mid_name,answers.prc,data], (err) => {
                 if (err) {
                   throw err;
                 }
