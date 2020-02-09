@@ -96,7 +96,7 @@ io.sockets.on('connection',(socket)=>{
            db.close()
      });
      socket.on('updateResult', (data)=>{
-          update.UpdateData(data.dtest,data.xray,data.uri,data.btype,data.hbsag,data.v1,data.v2,data.v3)
+          update.UpdateData(data.dtest,data.xray,data.uri,data.btype,data.hbsag,data.v1,data.v2,data.v3,data.id)
           console.log(data)
      });
 });
