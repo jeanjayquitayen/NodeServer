@@ -64,7 +64,7 @@ parser.on('data', (data)=>{
           
      });
      // close the database connection
-     db.close();
+     // db.close();
   });
 usbport.on('error',(err)=>{
      console.log(err);
@@ -93,7 +93,7 @@ io.sockets.on('connection',(socket)=>{
                io.sockets.emit('serverData', row);
 
           });
-          db.close()
+          // db.close()
      });
      socket.on('updateResult', (data)=>{
           update.UpdateData(data.dtest,data.xray,data.uri,data.btype,data.hbsag,data.v1,data.v2,data.v3)
