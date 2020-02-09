@@ -80,6 +80,7 @@ parser.on('data', (data)=>{
       }
       else{
         inquirer.prompt(questions).then(answers => {
+            console.log(data);
             console.log(JSON.stringify(answers, null, '  '));
             manage.InsertData(
               answers.first_name,
@@ -92,7 +93,6 @@ parser.on('data', (data)=>{
               answers.idnumber
             );
           });
-          console.log("Save!")
       }
     });
      
