@@ -4,7 +4,7 @@ var inquirer = require('inquirer');
 
 
 let sqlite3 = require('sqlite3').verbose();
-
+const ArduinoPort = SerialConfig.get("Arduino.port");
 var questions = [
   {
     type: 'input',
@@ -56,7 +56,7 @@ const Readline = SerialPort.parsers.Readline; var inquirer = require('inquirer')
 // var chalkPipe = require('chalk-pipe');
 let manage = require('./insertdata.js')
 
-const usbport = new SerialPort('/dev/ttyACM0',{
+const usbport = new SerialPort(ArduinoPort.port,{
       baudRate: 9600
     
      });
