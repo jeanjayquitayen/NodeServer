@@ -41,6 +41,11 @@ var questions = [
     type: 'input',
     name: 'idnumber',
     message: "What's your id number",
+  },
+  {
+    type: 'password',
+    name: 'pin',
+    message: "Enter pin",
   }
 ];
 
@@ -90,7 +95,8 @@ parser.on('data', (data)=>{
               answers.year,
               answers.gender,
               data,
-              answers.idnumber
+              answers.idnumber,
+              answers.pin
             );
           });
       }

@@ -3,7 +3,7 @@ let sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('records.db');
 
 
-  function  InsertData(firstname,lastname,middlename,course,year,gender,idcode,stdnum){
+  function  InsertData(firstname,lastname,middlename,course,year,gender,idcode,stdnum,pin){
         let sql = `INSERT INTO students(
           firstname,
           lastname,
@@ -12,9 +12,10 @@ let db = new sqlite3.Database('records.db');
           year,
           gender,
           idcode,
-          stdnum)
+          stdnum,
+          pin)
          VALUES(?,?,?,?,?,?,?,?)`;
-        db.run(sql, [firstname,lastname,middlename,course,year,gender,idcode,stdnum], (err) => {
+        db.run(sql, [firstname,lastname,middlename,course,year,gender,idcode,stdnum,pin], (err) => {
             if (err) {
               throw err;
             }
