@@ -14,7 +14,7 @@ let db = new sqlite3.Database('records.db');
           idcode,
           stdnum,
           pin)
-         VALUES(?,?,?,?,?,?,?,?)`;
+         VALUES(?,?,?,?,?,?,?,?,?)`;
         db.run(sql, [firstname,lastname,middlename,course,year,gender,idcode,stdnum,pin], (err) => {
             if (err) {
               throw err;
